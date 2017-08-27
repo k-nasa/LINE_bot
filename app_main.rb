@@ -2,6 +2,10 @@ require 'sinatra'
 require 'line/bot'
 require 'httpclient'
 require 'json'
+
+
+#前の会話と流れをもたせるための変数
+#context = []
 #動作 確認用。
 get '/' do
   "Hello world"
@@ -67,5 +71,7 @@ def chat(msg)
   uri = 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=3549664a4c676144774c50573564565265784865326964767739705a714a304c307630586b683948354839'
   res = clnt.post_content(uri, body, {'Content-Type' => 'application/json'})
   my_hash = JSON.parse(res)
-  return  my_hash['utt'].to_s
+  context = my_hash['context'].to_s
+  #return  my_hash['utt'].to_s
+  return my_hash['context'].to_s
 end
