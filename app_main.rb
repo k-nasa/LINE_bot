@@ -37,14 +37,7 @@ post '/callback' do
           #オウム返し
           text: event.message['text']
         }
-        client.reply_message(event['replyToken'], message)
-        message = {
-          type: 'text',
-          text: weather
-          #オウム返し
-          #text: event.message['text']
-        }
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], "こんにちは")
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
