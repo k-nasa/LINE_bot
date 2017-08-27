@@ -41,7 +41,7 @@ post '/callback' do
         else
           my_hash = chat(event.message['text'],context)
           context = my_hash['context']
-          reply = my_hash['context']
+          reply = my_hash['utt']
         end
 
         #返信メッセージ
