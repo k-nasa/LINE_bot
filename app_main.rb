@@ -31,13 +31,19 @@ post '/callback' do
       
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
+        if event.message['text'] =="こんにちは"
+          reply = "黙れ"
+        else
+          reply = event.message['text']
+        end
         message = {
           type: 'text',
           #text: weather
           #オウム返し
-          text: event.message['text']
+          #text: event.message['text']
+          text: reply
         }
-        client.reply_message(event['replyToken'], "こんにちは")
+        client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
