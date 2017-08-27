@@ -31,10 +31,10 @@ post '/callback' do
       when Line::Bot::Event::MessageType::Text
         message = {
           type: 'text',
-          text: event.message['text']
-          #text: 'hogehoge'
+          #text: event.message['text']
+          text: 'hogehoge'
         }
-        client.reply_message(event['replyToken'], "hogehoge")
+        client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
