@@ -39,6 +39,8 @@ post '/callback' do
       when Line::Bot::Event::MessageType::Text
         if event.message['text'] =="ぬるぽ"
           reply = "ガッ"
+        elsif event.message['text']=="今日のご飯"
+          reply = today_lunch
         else
           my_hash = chat(event.message['text'],context,mode)
           context = my_hash['context']
@@ -78,4 +80,9 @@ def chat(msg,context=nil,mode)
   context = my_hash['context'].to_s
   #return  my_hash['utt'].to_s
   return my_hash
+end
+
+def today_lunch
+  lunch = ["高砂","仁科家(味噌ラーメン)","CoCo壱番屋","オアシス","麺勝","コンビニエンス",]
+  return lunch[rand(1..lunch.size)]
 end
