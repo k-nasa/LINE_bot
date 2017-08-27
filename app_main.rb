@@ -31,10 +31,12 @@ post '/callback' do
       
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
+        client.reply_message(event['replyToken'], message)
         message = {
           type: 'text',
           text: weather
-          #text: 'hogehoge'
+          #オウム返し
+          #text: event.message['text']
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
