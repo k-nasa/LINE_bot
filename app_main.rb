@@ -28,10 +28,12 @@ post '/callback' do
     case event
     when Line::Bot::Event::Message
       case event.type
+      
+      #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
         message = {
           type: 'text',
-          text: event.message['text'] + 'hogehoge'
+          text: weather
           #text: 'hogehoge'
         }
         client.reply_message(event['replyToken'], message)
@@ -44,4 +46,8 @@ post '/callback' do
   }
 
   "OK"
+end
+
+def weather
+  "今日の天気は晴れ！"
 end
