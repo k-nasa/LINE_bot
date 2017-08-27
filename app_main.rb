@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'line/bot'
-
+require 'httpclient'
+require 'json'
 #動作 確認用。
 get '/' do
   "Hello world"
@@ -32,15 +33,14 @@ post '/callback' do
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
         if event.message['text'] =="こんにちは"
-          reply = "黙れ"
+          reply = chat(event.message['text'])
         else
           reply = event.message['text']
         end
+
+        #返信メッセージ
         message = {
           type: 'text',
-          #text: weather
-          #オウム返し
-          #text: event.message['text']
           text: reply
         }
         client.reply_message(event['replyToken'], message)
@@ -57,4 +57,15 @@ end
 
 def weather
   "今日の天気は晴れ！"
+end
+
+#雑談APIと会話
+def chat(msg)
+  puts 'Me>' + msg
+  body = JSON.generate(utt: msg) # {:utt => msg}のこと
+  clnt = HTTPClient.new
+  uri = 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=3549664a4c676144774c50573564565265784865326964767739705a714a304c307630586b683948354839'
+  res = clnt.post_content(uri, body, {'Content-Type' => 'application/json'})
+  my_hash = JSON.parse(res)
+  return  my_hash['utt'].to_s
 end
