@@ -5,7 +5,7 @@ require 'json'
 
 
 #前の会話と流れをもたせるための変数
-#context = []
+context = 'heiheifh'
 #動作 確認用。
 get '/' do
   "Hello world"
@@ -39,7 +39,8 @@ post '/callback' do
         if event.message['text'] =="こんにちは"
           reply = "こん！"
         else
-          my_hash = chat(event.message['text'])
+          my_hash = chat(event.message['text'],context)
+          context = my_hash['context']
           reply = my_hash['context']
         end
 
