@@ -37,8 +37,8 @@ post '/callback' do
       
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
-        if event.message['text'] =="こんにちは"
-          reply = "こん！"
+        if event.message['text'] =="ぬるぽ"
+          reply = "ガッ"
         else
           my_hash = chat(event.message['text'],context,mode)
           context = my_hash['context']
