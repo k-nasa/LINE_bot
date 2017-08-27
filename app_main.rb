@@ -7,6 +7,8 @@ require 'json'
 #前の会話と流れをもたせるための変数
 context = nil
 mode = nil
+
+random = Random.new
 #動作 確認用。
 get '/' do
   "Hello world"
@@ -84,5 +86,5 @@ end
 
 def today_lunch
   lunch = ["高砂","仁科家(味噌ラーメン)","CoCo壱番屋","オアシス","麺勝","コンビニエンス",]
-  return lunch[rand(1..lunch.size)]
+  return lunch[random.rand(1..lunch.size)]
 end
