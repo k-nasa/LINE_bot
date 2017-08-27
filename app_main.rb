@@ -33,9 +33,9 @@ post '/callback' do
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
         if event.message['text'] =="こんにちは"
-          reply = chat(event.message['text'])
+          reply = "こん！"
         else
-          reply = event.message['text']
+          reply = chat(event.message['text'])
         end
 
         #返信メッセージ
