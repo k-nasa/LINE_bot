@@ -39,7 +39,7 @@ post '/callback' do
         if event.message['text'] =="こんにちは"
           reply = "こん！"
         else
-          my_hash = chat(event.message['text'],my_hash['context'])
+          my_hash = chat(event.message['text'])
           reply = my_hash['context']
         end
 
