@@ -86,5 +86,5 @@ end
 
 def today_lunch
   lunch = ["高砂","仁科家(味噌ラーメン)","CoCo壱番屋","オアシス","麺勝","コンビニエンス",]
-  return lunch[random.rand(1..lunch.size)]
+  return lunch[rand(1..lunch.size)]
 end
