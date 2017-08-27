@@ -31,6 +31,12 @@ post '/callback' do
       
       #テキストがbotに送信された場合message[text]が送信される
       when Line::Bot::Event::MessageType::Text
+        message = {
+          type: 'text',
+          text: weather
+          #オウム返し
+          #text: event.message['text']
+        }
         client.reply_message(event['replyToken'], message)
         message = {
           type: 'text',
