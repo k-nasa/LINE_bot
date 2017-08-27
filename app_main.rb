@@ -33,9 +33,9 @@ post '/callback' do
       when Line::Bot::Event::MessageType::Text
         message = {
           type: 'text',
-          text: weather
+          #text: weather
           #オウム返し
-          #text: event.message['text']
+          text: event.message['text']
         }
         client.reply_message(event['replyToken'], message)
         message = {
