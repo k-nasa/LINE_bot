@@ -42,7 +42,7 @@ post '/callback' do
         if event.message['text'] =="ぬるぽ"
           reply = "ガッ"
         elsif event.message['text']=="今日のご飯"
-          today_lunch(random.rand(1..6))
+          reply = today_lunch
         else
           my_hash = chat(event.message['text'],context,mode)
           context = my_hash['context']
@@ -84,8 +84,7 @@ def chat(msg,context=nil,mode)
   return my_hash
 end
 
-def today_lunch(r)
+def today_lunch
   lunch = ["高砂","仁科家(味噌ラーメン)","CoCo壱番屋","オアシス","麺勝","コンビニエンス",]
-  return lunch[r]
+  return lunch[random.rand(1..lunch.size)]
 end
-
