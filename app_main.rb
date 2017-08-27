@@ -1,11 +1,12 @@
 require 'sinatra'
 require 'line/bot'
 
-# 微小変更部分！確認用。
+#動作 確認用。
 get '/' do
   "Hello world"
 end
 
+#botのtoken,secretの登録
 def client
   @client ||= Line::Bot::Client.new { |config|
     config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
@@ -13,6 +14,7 @@ def client
   }
 end
 
+#botの中身
 post '/callback' do
   body = request.body.read
 
@@ -30,8 +32,9 @@ post '/callback' do
         message = {
           type: 'text',
           text: event.message['text']
+          #text: 'hogehoge'
         }
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], "hogehoge")
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
