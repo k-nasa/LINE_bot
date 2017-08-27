@@ -5,7 +5,7 @@ require 'json'
 
 
 #前の会話と流れをもたせるための変数
-context = 'heiheifh'
+context = nil
 #動作 確認用。
 get '/' do
   "Hello world"
