@@ -48,7 +48,8 @@ post '/callback' do
           mode = nil
           reply = 'リセット完了!'
         else
-          my_hash = chat(event.message['text'],context)
+          my_hash = chat(event.message['text'],context,mode)
+          mode = my_hash['mode']
           context = my_hash['context']
           reply = my_hash['utt']
         end
@@ -75,9 +76,9 @@ def weather
 end
 
 #雑談APIと会話
-def chat(msg,context=nil)
+def chat(msg,context=nil,mode)
   puts 'Me>' + msg
-  body = JSON.generate(utt: msg,context: context,t: 20,"place":"福岡",mode: "dialog")
+  body = JSON.generate(utt: msg,context: context,t: 20,"place":"福岡",mode: mode)
   clnt = HTTPClient.new
   uri = 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=3549664a4c676144774c50573564565265784865326964767739705a714a304c307630586b683948354839'
   res = clnt.post_content(uri, body, {'Content-Type' => 'application/json'})
