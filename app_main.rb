@@ -43,6 +43,10 @@ post '/callback' do
           reply = "ガッ"
         elsif event.message['text']=="今日のご飯"
           reply = today_lunch
+        elsif event.message['text'] =="リセット"
+          context = nil
+          mode = nil
+          reply = 'リセット完了!'
         else
           my_hash = chat(event.message['text'],context)
           context = my_hash['context']
